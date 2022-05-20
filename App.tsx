@@ -1,20 +1,48 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { Provider as PaperProvider } from 'react-native-paper'
+import { Provider } from 'react-redux'
+import { store } from './redux/index'
+import Main from './screens/Main'
+import DailyForecast from './screens/DailyForecast'
+import Search from './screens/Search'
 
-export default function App() {
+const Stack = createNativeStackNavigator()
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <NavigationContainer>
+      <Provider store={store}>
+        <PaperProvider>
+          <Stack.Navigator>
+            <Stack.Screen
+              name='Main'
+              component={Main}
+              options={{
+                title: '',
+                headerTitleAlign: 'center',
+              }}
+            />
+            <Stack.Screen
+              name='DailyForecast'
+              component={DailyForecast}
+              options={{
+                title: 'Daily forecast',
+              }}
+            />
+            <Stack.Screen
+              name='Search'
+              component={Search}
+              options={{
+                title: 'Search',
+                headerTitleAlign: 'center',
+              }}
+            />
+          </Stack.Navigator>
+        </PaperProvider>
+      </Provider>
+    </NavigationContainer>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App
