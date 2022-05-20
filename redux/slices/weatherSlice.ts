@@ -4,11 +4,7 @@ const weatherSlice = createSlice({
   name: 'weather',
   initialState: {
     weather: [],
-    coordinates: {
-      identifier: 'moscow',
-      latitude: '55.7504461',
-      longitude: '37.6174943',
-    },
+    coordinates: {},
     dailyWeatherData: [],
   },
   reducers: {

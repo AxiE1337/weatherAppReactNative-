@@ -16,13 +16,13 @@ import useAsyncStorage from '../hooks/useAsyncStorage'
 
 function Main({ navigation }: any) {
   const { isFetching, getDailyWeatherData } = useWeather()
+  const { isFetchingCoords } = useAsyncStorage()
   const weatherData = useSelector((state: any) => state.weather.weather)
   const coordinates = useSelector((state: any) => state.weather.coordinates)
 
   useEffect(() => {
-    getDailyWeatherData(coordinates)
-    console.log(coordinates, 'main')
-  }, [])
+    !isFetchingCoords && getDailyWeatherData(coordinates)
+  }, [isFetchingCoords])
 
   useLayoutEffect(() => {
     navigation.setOptions({

@@ -33,6 +33,7 @@ export default function useAsyncStorage() {
           longitude: '37.6174943',
         }
         dispatch(setCoordinates(coordinates))
+        getDailyWeatherData(coordinates)
       }
     } catch (e) {
       console.log(e)
